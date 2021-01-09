@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-line-demo": {
+      "hosting": {
+        "angular-line-demo": [
+          "angular-line-demo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-line-demo"
+  }
+}
