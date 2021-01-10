@@ -15,6 +15,12 @@
   </ng-container>
 
   <ng-template #blank>
-    <button mat-raised-button color="primary">ログイン</button>
+    <button
+      (click)="authService.googleLogin()"
+      mat-raised-button
+      color="primary"
+    >
+      ログイン
+    </button>
   </ng-template>
 </mat-toolbar>

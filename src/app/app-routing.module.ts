@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
@@ -7,7 +9,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./welcome/welcome.module').then(
         (m) => m.WelcomeModule
-      )
+      ),
+    canActivate: [LoginGuard],
+    canLoad: [LoginGuard]
   },
   {
     path: '',
@@ -15,7 +19,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./top/top.module').then(
         (m) => m.TopModule
-      )
+      ),
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
   },
 ];
 
