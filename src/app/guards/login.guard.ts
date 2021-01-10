@@ -3,6 +3,7 @@ import { CanActivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, Router
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { RedirectService } from '../services/redirect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,12 @@ export class LoginGuard implements CanActivate, CanLoad {
     map((user) => !user),
     tap((isLoggedIn) => {
       if (!isLoggedIn) {
-        this.router.navigateByUrl('/');
+        this.redirectService.redirectToTop();
       }
     })
   );
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private redirectService: RedirectService) { }
 
   canActivate(): Observable<boolean> {
     return this.check$;

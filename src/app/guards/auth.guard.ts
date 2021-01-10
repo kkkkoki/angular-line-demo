@@ -3,6 +3,7 @@ import { CanActivate, CanLoad, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { RedirectService } from '../services/redirect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ export class AuthGuard implements CanActivate, CanLoad {
     map((user) => !!user),
     tap((isLoggedIn) => {
       if (!isLoggedIn) {
-        this.router.navigateByUrl('/welcome');
+        this.redirectService.redirectToWelcome()
       }
     })
   );
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private redirectService: RedirectService) { }
 
   canActivate(): Observable<boolean> {
     return this.check$;

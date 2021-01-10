@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
       if (user) {
-        this.router.navigateByUrl('/');
+        this.redirectService.redirectToTop();
       } else {
         this.ngOnInit();
       }
@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
     await this.authService.logout();
     this.authService.user$.subscribe((user) => {
       if (!user) {
-        console.log('if')
         this.redirectService.redirectToWelcome();
       } else {
         this.ngOnInit();
